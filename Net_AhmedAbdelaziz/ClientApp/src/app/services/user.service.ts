@@ -13,11 +13,17 @@ export class UserService {
         return this.http.get(`api/user/${id}`);
     }
     addUser(user): Observable<any> {
-        debugger
+
         const httpHeaders = this.getHTTPHeaders();
         return this.http.post(`api/user`, {...user}, { headers: httpHeaders });
     }
-
+    UpdateUser(payload): Observable<any> {
+        const httpHeaders = this.getHTTPHeaders();
+        return this.http.put(`api/user/${payload.id}`, {...payload.user}, { headers: httpHeaders });
+    }
+    deleteUserById(id): Observable<any> {
+        return this.http.delete(`api/user/${id}`);
+    }
 
     getHTTPHeaders(): HttpHeaders {
 		const result = new HttpHeaders();

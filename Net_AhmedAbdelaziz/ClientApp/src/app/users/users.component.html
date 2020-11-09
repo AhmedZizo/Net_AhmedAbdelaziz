@@ -11,22 +11,23 @@
 
   <table class="table">
     <thead>
-      <th>Username</th>
-      <!-- <th>Name</th> -->
+      <th>Name</th>
       <th>Last name</th>
-      <th>Phone no</th>
+      <th>Username</th>
       <th>Email</th>
+      <th>Phone no</th>
       <th></th>
     </thead>
     <tbody>
       <tr *ngFor="let user of users" >
-        <td>{{user.username}}</td>
+        <td>{{user.name}}</td>
         <td>{{user.lastName}}</td>
-        <td>{{user.phoneNumber}}</td>
+        <td>{{user.username}}</td>
         <td>{{user.email}}</td>
+        <td>{{user.phoneNumber}}</td>
         <td>
           <button class="btn btn-primary" [routerLink]="['user-detail/'+user.id]" style="margin-right: 3px;">Edit</button>
-          <button class="btn btn-danger"> Delete</button>
+          <button class="btn btn-danger" (click)="deleteUser(user.id)"> Delete</button>
         </td>
       </tr>
     </tbody>

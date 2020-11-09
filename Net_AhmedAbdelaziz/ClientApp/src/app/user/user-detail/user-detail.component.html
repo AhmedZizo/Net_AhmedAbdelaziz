@@ -4,18 +4,34 @@
     </div>
     <div class="row">
         <form [formGroup]="userForm" (submit)="onSubmit()">
-
-
-            <!-- <input class="form-control" placeholder="Enter name" formControlName="name"> -->
-            <input class="form-control" placeholder="Enter name" formControlName="lastName">
-            <input class="form-control" placeholder="Enter name" formControlName="username">
-            <input class="form-control" placeholder="Enter name" formControlName="email">
-            <input class="form-control" placeholder="Enter name" formControlName="phoneNumber">
-            <input class="form-control" placeholder="Enter name" formControlName="password">
+            
+            <div>
+                <label>First Name</label>
+                <input class="form-control" placeholder="Enter your firstname" formControlName="name" required>
+            </div>
+             
+            <div>   
+                <label>Last Name</label>
+                <input class="form-control" placeholder="Enter your lastname" formControlName="lastName">
+            </div><div>
+                <label>Username</label>
+                <input class="form-control" placeholder="Enter your username" formControlName="username">
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="Enter your password" formControlName="password">
+                </div>
+                <div>
+                    <label>Email</label>    
+                <input type="email" class="form-control" placeholder="Enter your email address" formControlName="email">
+            </div>
+            <div>
+                <label>Phone Number</label>
+                <input class="form-control" placeholder="Enter you phone #" formControlName="phoneNumber">
+            </div>            
 
             <div>
                 <button [routerLink]="['/']" class="btn btn-default">Back</button>
-                <!-- <button (click)="onSubmit()" class="btn btn-primary">Save</button> -->
                 <input type="submit"  class="btn btn-primary"  value="Save"/>
             </div>
         </form>
