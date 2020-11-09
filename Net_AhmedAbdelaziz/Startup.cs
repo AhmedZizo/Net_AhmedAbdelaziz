@@ -1,10 +1,17 @@
+using System.Reflection;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Net_AhmedAbdelaziz.Data;
+using Net_AhmedAbdelaziz.Entities;
+using Net_AhmedAbdelaziz.Profiler;
 
 namespace Net_AhmedAbdelaziz
 {
@@ -18,8 +25,16 @@ namespace Net_AhmedAbdelaziz
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
+        public void ConfigureServices(IServiceCollection services) {
+            services.AddAutoMapper(new Assembly[] {
+                 typeof(AutoMapperProfile).GetTypeInfo().Assembly,
+            }).AddDbContext<AppDbContext>(options => {
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                }).AddIdentity<User,IdentityRole>()
+            .AddEntityFrameworkStores<AppDbContext>()
+            .AddDefaultTokenProviders();
+            
+            
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
