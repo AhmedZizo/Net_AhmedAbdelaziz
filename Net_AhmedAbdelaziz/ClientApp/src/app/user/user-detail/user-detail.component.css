@@ -9,3 +9,8 @@
 .wrpper{
     display: flex;
 }
+.footer{
+    margin: 20px;
+    right: 0;
+    float: right;
+}

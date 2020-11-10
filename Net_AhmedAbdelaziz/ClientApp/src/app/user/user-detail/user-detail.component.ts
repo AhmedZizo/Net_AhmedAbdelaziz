@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserService } from "src/app/services/user.service";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-user',
@@ -10,7 +11,7 @@ import { UserService } from "src/app/services/user.service";
 })
 export class UserDetailComponent implements OnInit {
     userForm: FormGroup;
-    id:any;
+    id: any;
     user: any = {
         name: "",
         lastName: "",
@@ -18,7 +19,7 @@ export class UserDetailComponent implements OnInit {
         password: "",
         email: "",
         phoneNumber: ""
-        
+
     };
 
     newRecord: boolean = true;
@@ -26,9 +27,11 @@ export class UserDetailComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private _service: UserService,
         private _fb: FormBuilder,
-        private router: Router) { }
+        private router: Router,
+        private toastr: ToastrService) { }
 
     ngOnInit(): void {
+
         const routSub = this.activatedRoute.params.subscribe(params => {
             this.id = params && params['id'];
             this.newRecord = this.id === "new";
@@ -45,34 +48,39 @@ export class UserDetailComponent implements OnInit {
     }
     createForm() {
         this.userForm = this._fb.group({
-            name: [this.user.name,[Validators.required, Validators.minLength(3)]],
+            name: [this.user.name, [Validators.required, Validators.minLength(3)]],
             lastName: [this.user.lastName, [Validators.required, Validators.minLength(3)]],
-            username: [this.user.username,[Validators.required, Validators.minLength(5)]],
-            password: [this.user.password,[Validators.required, Validators.minLength(6)]],
-            email: [this.user.email, [Validators.required, Validators.email,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-            phoneNumber: [this.user.phoneNumber,Validators.pattern("^((\\+-?)|0)?[0-9]{10}$")],
+            username: [this.user.username, [Validators.required, Validators.minLength(5)]],
+            password: [this.user.password, this.newRecord ? [Validators.required, Validators.minLength(6)] : []],
+            email: [this.user.email, [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+            phoneNumber: [this.user.phoneNumber, Validators.pattern("^((\\+-?)|0)?[0-9]{10}$")],
         })
     }
     onSubmit() {
-		const controls = this.userForm.controls;
-		/** check form */
-		if (this.userForm.invalid) {
-			Object.keys(controls).forEach(controlName =>
-				controls[controlName].markAsTouched()
-			);
-			return;
+        const controls = this.userForm.controls;
+        /** check form */
+
+        if (!this.userForm.valid) {
+            Object.keys(controls).forEach(controlName =>
+                controls[controlName].markAsTouched()
+            );
+            return;
         }
-        
-        const data=this.perpareUser();
-        debugger
+
+        const data = this.perpareUser();
+
         if (this.newRecord) {
             // hit create api
             this._service.addUser(data).subscribe(v => {
+                this.toastr.success('Success ', 'create new user successfully');
                 this.router.navigateByUrl("/")
+
             });
         } else {
             // hit update api 
-            this._service.UpdateUser({id:this.id,user:data}).subscribe(v=>{
+            this._service.UpdateUser({ id: this.id, user: data }).subscribe(v => {
+                debugger
+                this.toastr.success('Success ', 'Update  user successfully');
                 this.router.navigateByUrl("/")
             });
         }

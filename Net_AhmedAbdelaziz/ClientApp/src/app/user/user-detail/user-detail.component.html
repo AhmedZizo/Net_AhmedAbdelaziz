@@ -12,7 +12,7 @@
                         <input class="form-control form-control_error" placeholder="Enter your firstname"
                             formControlName="name" required>
                         <span class="error"
-                            *ngIf="userForm.invalid && userForm.controls['name'].touched&&userForm.controls['name'].errors.required">
+                            *ngIf="userForm.invalid && userForm.controls['name'].touched&&userForm.controls['name'].errors?.required">
                             name is required
                         </span>
                     </div>
@@ -60,7 +60,7 @@
                         <input type="email" class="form-control form-control_error"
                             placeholder="Enter your email address" formControlName="email">
                         <span class="error"
-                            *ngIf="userForm.invalid && userForm.controls['email'].touched&&userForm.controls['email'].errors.required">
+                            *ngIf="userForm.invalid && userForm.controls['email'].touched&&userForm.controls['email'].errors?.required">
                             email is required
                         </span>
                     </div>
@@ -78,8 +78,8 @@
                     </div>
                 </div>
 
-                <div>
-                    <button [routerLink]="['/']" class="btn btn-default">Back</button>
+                <div class="footer">
+                    <button [routerLink]="['/']" class="btn">Back</button>
                     <input type="submit" class="btn btn-primary" value="Save" />
                 </div>
             </form>
