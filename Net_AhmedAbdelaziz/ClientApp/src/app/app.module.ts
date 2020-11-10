@@ -8,7 +8,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { UsersComponent } from './users/users.component';
 import { UserService } from 'src/app/services/user.service';
 import { UserDetailComponent } from 'src/app/user/user-detail/user-detail.component';
-
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -30,6 +30,7 @@ import { UserDetailComponent } from 'src/app/user/user-detail/user-detail.compon
       { path: '', component: UsersComponent, pathMatch: 'full' },
       { path: 'user-detail/:id', component: UserDetailComponent, pathMatch: 'full' },
     ]),
+    ToastrModule.forRoot()
   ],
   providers: [
     UserService

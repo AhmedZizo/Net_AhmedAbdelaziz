@@ -3,37 +3,86 @@
 
     </div>
     <div class="row">
-        <form [formGroup]="userForm" (submit)="onSubmit()">
-            
-            <div>
-                <label>First Name</label>
-                <input class="form-control" placeholder="Enter your firstname" formControlName="name" required>
-            </div>
-             
-            <div>   
-                <label>Last Name</label>
-                <input class="form-control" placeholder="Enter your lastname" formControlName="lastName">
-            </div><div>
-                <label>Username</label>
-                <input class="form-control" placeholder="Enter your username" formControlName="username">
-            </div>
-            <div>
-                <label>Password</label>
-                <input type="password" class="form-control" placeholder="Enter your password" formControlName="password">
+        <div class="col-md-8">
+            <form [formGroup]="userForm" (submit)="onSubmit()">
+
+                <div>
+                    <label>First Name</label>
+                    <div class="wrpper">
+                        <input class="form-control form-control_error" placeholder="Enter your firstname"
+                            formControlName="name" required>
+                        <span class="error"
+                            *ngIf="userForm.invalid && userForm.controls['name'].touched&&userForm.controls['name'].errors?.required">
+                            name is required
+                        </span>
+                    </div>
+                </div>
+
+                <div>
+                    <label>Last Name</label>
+                    <div class="wrpper">
+                        <input class="form-control form-control_error" placeholder="Enter your lastname"
+                            formControlName="lastName">
+                        <span class="error"
+                            *ngIf="userForm.invalid && userForm.controls['lastName'].touched&&userForm.controls['lastName'].errors?.required">
+                            lastName is required
+                        </span>
+                    </div>
                 </div>
                 <div>
-                    <label>Email</label>    
-                <input type="email" class="form-control" placeholder="Enter your email address" formControlName="email">
-            </div>
-            <div>
-                <label>Phone Number</label>
-                <input class="form-control" placeholder="Enter you phone #" formControlName="phoneNumber">
-            </div>            
+                    <label>Username</label>
 
-            <div>
-                <button [routerLink]="['/']" class="btn btn-default">Back</button>
-                <input type="submit"  class="btn btn-primary"  value="Save"/>
-            </div>
-        </form>
+                    <div class="wrpper">
+                        <input class="form-control form-control_error" placeholder="Enter your username"
+                            formControlName="username">
+                        <span class="error"
+                            *ngIf="userForm.invalid && userForm.controls['username'].touched&&userForm.controls['username'].errors?.required">
+                            username is required
+                        </span>
+                    </div>
+                </div>
+                <div>
+                    <label>Password</label>
+
+                    <div class="wrpper">
+                        <input type="password" class="form-control form-control_error" placeholder="Enter your password"
+                            formControlName="password">
+                        <span class="error"
+                            *ngIf="userForm.invalid && userForm.controls['password'].touched&&userForm.controls['password'].errors?.required">
+                            password is required
+                        </span>
+                    </div>
+                </div>
+                <div>
+                    <label>Email</label>
+
+                    <div class="wrpper">
+                        <input type="email" class="form-control form-control_error"
+                            placeholder="Enter your email address" formControlName="email">
+                        <span class="error"
+                            *ngIf="userForm.invalid && userForm.controls['email'].touched&&userForm.controls['email'].errors?.required">
+                            email is required
+                        </span>
+                    </div>
+                </div>
+                <div>
+                    <label>Phone Number</label>
+
+                    <div class="wrpper">
+                        <input class="form-control form-control_error" placeholder="Enter you phone #"
+                            formControlName="phoneNumber">
+                        <span class="error"
+                            *ngIf="userForm.invalid && userForm.controls['phoneNumber'].touched&&userForm.controls['phoneNumber'].errors?.required">
+                            phoneNumber is required
+                        </span>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <button [routerLink]="['/']" class="btn">Back</button>
+                    <input type="submit" class="btn btn-primary" value="Save" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
