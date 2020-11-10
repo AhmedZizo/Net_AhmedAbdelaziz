@@ -54,14 +54,25 @@ export class UserDetailComponent implements OnInit {
         })
     }
     onSubmit() {
+		const controls = this.userForm.controls;
+		/** check form */
+		if (this.userForm.invalid) {
+			Object.keys(controls).forEach(controlName =>
+				controls[controlName].markAsTouched()
+			);
+			return;
+        }
+        
+        const data=this.perpareUser();
+        debugger
         if (this.newRecord) {
             // hit create api
-            this._service.addUser(this.perpareUser()).subscribe(v => {
+            this._service.addUser(data).subscribe(v => {
                 this.router.navigateByUrl("/")
             });
         } else {
             // hit update api 
-            this._service.UpdateUser({id:this.id,user:this.perpareUser()}).subscribe(v=>{
+            this._service.UpdateUser({id:this.id,user:data}).subscribe(v=>{
                 this.router.navigateByUrl("/")
             });
         }
