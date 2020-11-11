@@ -48,15 +48,16 @@ export class UserDetailComponent implements OnInit {
     }
     createForm() {
         this.userForm = this._fb.group({
-            name: [this.user.name, [Validators.required, Validators.minLength(3)]],
-            lastName: [this.user.lastName, [Validators.required, Validators.minLength(3)]],
-            username: [this.user.username, [Validators.required, Validators.minLength(5)]],
-            password: [this.user.password, this.newRecord ? [Validators.required, Validators.minLength(6)] : []],
-            email: [this.user.email, [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-            phoneNumber: [this.user.phoneNumber, Validators.pattern("^((\\+-?)|0)?[0-9]{10}$")],
+            name: [this.user.name, [Validators.required, Validators.pattern("^((\\+-?)|0)?[A-Za-z0-9]{3,12}$")]],
+            lastName: [this.user.lastName, [Validators.required, Validators.pattern("^((\\+-?)|0)?[A-Za-z0-9]{3,12}$")]],
+            username: [this.user.username, Validators.required],
+            password: [this.user.password, this.newRecord ? [Validators.required, Validators.pattern("^((\\+-?)|0)?[A-Za-z0-9_$#]{6,50}$")] : []],
+            email: [this.user.email, [Validators.required, Validators.email]],
+            phoneNumber: [this.user.phoneNumber, [Validators.required,Validators.pattern("^((\\+-?)|0)?[0-9]{10}$")]],
         })
     }
     onSubmit() {
+        debugger
         const controls = this.userForm.controls;
         /** check form */
 

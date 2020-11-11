@@ -11,10 +11,15 @@
                     <div class="wrpper">
                         <input class="form-control form-control_error" placeholder="Enter your firstname"
                             formControlName="name" required>
+                            <span class="error"
+                            *ngIf="userForm.invalid && userForm.controls['name'].touched&&userForm.controls['name'].errors?.pattern">
+                            First Name is must be more than 3 characters
+                        </span>
                         <span class="error"
                             *ngIf="userForm.invalid && userForm.controls['name'].touched&&userForm.controls['name'].errors?.required">
-                            name is required
+                            First Name is required
                         </span>
+                        
                     </div>
                 </div>
 
@@ -23,10 +28,15 @@
                     <div class="wrpper">
                         <input class="form-control form-control_error" placeholder="Enter your lastname"
                             formControlName="lastName">
+                            <span class="error"
+                        *ngIf="userForm.invalid && userForm.controls['lastName'].touched&&userForm.controls['lastName'].errors?.pattern">
+                        Last Name must be more than 3 characters
+                    </span>
                         <span class="error"
                             *ngIf="userForm.invalid && userForm.controls['lastName'].touched&&userForm.controls['lastName'].errors?.required">
-                            lastName is required
+                            Last Name is required
                         </span>
+                        
                     </div>
                 </div>
                 <div>
@@ -37,8 +47,9 @@
                             formControlName="username">
                         <span class="error"
                             *ngIf="userForm.invalid && userForm.controls['username'].touched&&userForm.controls['username'].errors?.required">
-                            username is required
+                            Username is required
                         </span>
+                        
                     </div>
                 </div>
                 <div>
@@ -47,10 +58,15 @@
                     <div class="wrpper">
                         <input type="password" class="form-control form-control_error" placeholder="Enter your password"
                             formControlName="password">
+                            <span class="error"
+                        *ngIf="userForm.invalid && userForm.controls['password'].touched&&userForm.controls['password'].errors?.pattern">
+                        Password must be more than 6 characters at least includes 1 capital letter and 1 special char  _  $ #   
+                    </span>
                         <span class="error"
                             *ngIf="userForm.invalid && userForm.controls['password'].touched&&userForm.controls['password'].errors?.required">
-                            password is required
+                            Password is required
                         </span>
+                        
                     </div>
                 </div>
                 <div>
@@ -61,7 +77,11 @@
                             placeholder="Enter your email address" formControlName="email">
                         <span class="error"
                             *ngIf="userForm.invalid && userForm.controls['email'].touched&&userForm.controls['email'].errors?.required">
-                            email is required
+                            Email is required
+                        </span>
+                        <span class="error"
+                            *ngIf="userForm.invalid && userForm.controls['email'].touched&&userForm.controls['email'].errors?.email">
+                            Email is invalid
                         </span>
                     </div>
                 </div>
@@ -71,9 +91,13 @@
                     <div class="wrpper">
                         <input class="form-control form-control_error" placeholder="Enter you phone #"
                             formControlName="phoneNumber">
+                            <span class="error"
+                            *ngIf="userForm.invalid && userForm.controls['phoneNumber'].touched&&userForm.controls['phoneNumber'].errors?.pattern">
+                            PhoneNumber must be 10 digits without starting with Zero
+                        </span>
                         <span class="error"
                             *ngIf="userForm.invalid && userForm.controls['phoneNumber'].touched&&userForm.controls['phoneNumber'].errors?.required">
-                            phoneNumber is required
+                            PhoneNumber is required
                         </span>
                     </div>
                 </div>

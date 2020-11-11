@@ -9,6 +9,7 @@ import { UsersComponent } from './users/users.component';
 import { UserService } from 'src/app/services/user.service';
 import { UserDetailComponent } from 'src/app/user/user-detail/user-detail.component';
 import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { ToastrModule } from 'ngx-toastr';
       { path: '', component: UsersComponent, pathMatch: 'full' },
       { path: 'user-detail/:id', component: UserDetailComponent, pathMatch: 'full' },
     ]),
+    BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
   providers: [

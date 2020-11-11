@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,8 @@ export class UsersComponent implements OnInit {
   users:any[]=[];
   title= 'toaster-not';
   constructor(private _userservice:UserService,
-    private router: Router){
+    private router: Router,
+    private toastr: ToastrService){
 
   }
   ngOnInit(): void {
@@ -21,6 +23,7 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(id){
+    this.toastr.info('Delete ', 'Delete  user successfully');
     this._userservice.deleteUserById(id).subscribe(v=>{
       this.loadUsers();
 
